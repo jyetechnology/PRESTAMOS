@@ -1,0 +1,294 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crédito Prestamista</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#22c55e;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.resumen{
+    margin-top:25px;
+    background:#0f172a;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #334155;
+}
+
+.resumen h2{
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+.resumen p{
+    margin:10px 0;
+    font-size:17px;
+}
+
+.total{
+    font-size:24px;
+    font-weight:bold;
+    color:#22c55e;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    background:#25D366;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>CRÉDITO PRESTAMISTA</h1>
+
+<label>Nombres</label>
+<input type="text" id="nombres">
+
+<label>Apellidos</label>
+<input type="text" id="apellidos">
+
+<label>Dirección donde vive</label>
+<input type="text" id="direccion">
+
+<label>Número de cédula</label>
+<input type="text" id="cedula">
+
+<label>Teléfono</label>
+<input type="text" id="telefono">
+
+<label>Nombre de la empresa donde trabaja</label>
+<input type="text" id="empresa">
+
+<label>Dirección de la empresa</label>
+<input type="text" id="direccionEmpresa">
+
+<label>Valor a prestar</label>
+<input
+type="number"
+id="valor"
+oninput="calcular()"
+placeholder="Ingrese el valor">
+
+<label>Interés (%)</label>
+<input
+type="number"
+id="interes"
+value="30"
+oninput="calcular()">
+
+<label>Plazo en días</label>
+<input
+type="number"
+id="plazo"
+value="15">
+
+<div class="resumen">
+
+<h2>Resumen de la Solicitud</h2>
+
+<p>
+Valor solicitado:
+<strong id="valorSolicitado">$0</strong>
+</p>
+
+<p>
+Interés:
+<strong id="valorInteres">$0</strong>
+</p>
+
+<p class="total">
+Total a pagar:
+<span id="valorTotal">$0</span>
+</p>
+
+<p>
+Plazo:
+<strong id="plazoTexto">15 días</strong>
+</p>
+
+</div>
+
+<button onclick="enviarWhatsApp()">
+Enviar Solicitud
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const formatoCOP = new Intl.NumberFormat('es-CO',{
+style:'currency',
+currency:'COP',
+maximumFractionDigits:0
+});
+
+function calcular(){
+
+const valor =
+parseFloat(
+document.getElementById('valor').value
+) || 0;
+
+const interes =
+parseFloat(
+document.getElementById('interes').value
+) || 0;
+
+const plazo =
+document.getElementById('plazo').value;
+
+const valorInteres =
+valor * interes / 100;
+
+const total =
+valor + valorInteres;
+
+document.getElementById('valorSolicitado')
+.innerText = formatoCOP.format(valor);
+
+document.getElementById('valorInteres')
+.innerText = formatoCOP.format(valorInteres);
+
+document.getElementById('valorTotal')
+.innerText = formatoCOP.format(total);
+
+document.getElementById('plazoTexto')
+.innerText = plazo + " días";
+}
+
+function enviarWhatsApp(){
+
+const nombres =
+document.getElementById('nombres').value;
+
+const apellidos =
+document.getElementById('apellidos').value;
+
+const direccion =
+document.getElementById('direccion').value;
+
+const cedula =
+document.getElementById('cedula').value;
+
+const telefono =
+document.getElementById('telefono').value;
+
+const empresa =
+document.getElementById('empresa').value;
+
+const direccionEmpresa =
+document.getElementById('direccionEmpresa').value;
+
+const valor =
+parseFloat(
+document.getElementById('valor').value
+) || 0;
+
+const interes =
+parseFloat(
+document.getElementById('interes').value
+) || 0;
+
+const plazo =
+document.getElementById('plazo').value;
+
+const valorInteres =
+valor * interes / 100;
+
+const total =
+valor + valorInteres;
+
+const mensaje = `SOLICITUD DE CRÉDITO
+
+Nombres: ${nombres}
+Apellidos: ${apellidos}
+Cédula: ${cedula}
+Teléfono: ${telefono}
+Dirección: ${direccion}
+
+Empresa: ${empresa}
+Dirección empresa: ${direccionEmpresa}
+
+Valor solicitado: ${formatoCOP.format(valor)}
+Interés: ${formatoCOP.format(valorInteres)}
+Total a pagar: ${formatoCOP.format(total)}
+Plazo: ${plazo} días`;
+
+const url =
+`https://wa.me/573241294986?text=${encodeURIComponent(mensaje)}`;
+
+window.open(url,'_blank');
+
+}
+
+calcular();
+
+</script>
+
+</body>
+</html>
+```

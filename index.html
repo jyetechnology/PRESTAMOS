@@ -140,7 +140,27 @@ cursor:pointer;
 
 </div>
 
-<button onclick="enviarWhatsApp()">
+<button onclick="enviarWhatsApp(fetch("https://script.google.com/macros/s/AKfycbz0ithgLG2jt97B4yyZe90UgmDRAt30p95D3iXBcz5XXdI1J_kW-LLt57Pry_XDIVft/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+  },
+  body: JSON.stringify({
+    nombres,
+    apellidos,
+    cedula,
+    telefono,
+    direccion,
+    empresa,
+    direccionEmpresa,
+    valor,
+    interes,
+    total,
+    plazo
+  })
+})
+.then(r => console.log("Enviado"))
+.catch(err => console.error(err));)">
 Enviar Solicitud
 </button>
 

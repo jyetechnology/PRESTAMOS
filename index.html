@@ -238,7 +238,22 @@ Valor solicitado: ${formatoCOP.format(valor)}
 Interés: ${formatoCOP.format(valorInteres)}
 Total a pagar: ${formatoCOP.format(total)}
 Plazo: ${plazo} días`;
-
+fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnRXiF-PGKqtWDSz32E9ePuQvbadw7AE9VYgpqOjoJnCBa4J3q6HDgaezx67ykGL5wKbrYH5qfKs9j6iriMWgHlnqj18E6XBVMKpk80wTqbEu-4Wstuzbo0_BQqRGNw9tAvw-EfKqSGFjVwntUUlgJextd381sYeznXyvqwwtYZujn01gUs-l6mTZBCNMtCGslos0EJH9QfLsgcoeeTUiX2wFuNNiaoDdNYueF3q8BwVRvg-E8tWHbral4VbcegiIfa9E5NoXs8NuYqDsUud5Jz8ST4LTw&lib=M-PIdhrCgCsP7UZPjZmdtfJewGRAB47bW", {
+    method: "POST",
+    body: JSON.stringify({
+        nombres,
+        apellidos,
+        cedula,
+        telefono,
+        direccion,
+        empresa,
+        direccionEmpresa,
+        valor,
+        interes,
+        total,
+        plazo
+    })
+});
 window.open(
 `https://wa.me/573241294986?text=${encodeURIComponent(mensaje)}`,
 '_blank'

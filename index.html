@@ -1,1 +1,142 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>CrediCash</title></head><body><h1>CREDICASH</h1><p>Archivo base generado. Reemplaza con versión completa si deseas más funciones.</p></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crédito Prestamista</title>
+<style>
+:root{--verde:#0f5132;--azul:#0b3d91;--blanco:#fff;}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb}
+.header{background:linear-gradient(135deg,var(--verde),var(--azul));color:#fff;padding:25px;text-align:center}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+label{font-weight:bold;font-size:.9rem}
+input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;margin-top:6px}
+.summary{margin-top:20px;background:#eef6ff;padding:15px;border-radius:10px}
+.row{display:flex;justify-content:space-between;padding:6px 0}
+button{width:100%;padding:14px;border:none;border-radius:10px;background:var(--verde);color:#fff;font-size:1rem;cursor:pointer}
+button:hover{opacity:.95}
+.msg{margin-top:10px;text-align:center}
+.loader{display:none;text-align:center;margin-top:10px}
+@media(max-width:600px){.row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="header"><h1>Crédito Prestamista</h1><p>Solicitud de crédito en línea</p></div>
+<div class="container">
+<div class="card">
+<form id="form">
+<div class="grid">
+<div><label>Nombres</label><input required id="nombres"></div>
+<div><label>Apellidos</label><input required id="apellidos"></div>
+<div><label>Dirección de residencia</label><input required id="direccion"></div>
+<div><label>Número de cédula</label><input required id="cedula"></div>
+<div><label>Teléfono</label><input required id="telefono"></div>
+<div><label>Empresa donde trabaja</label><input required id="empresa"></div>
+<div><label>Dirección de la empresa</label><input required id="direccionEmpresa"></div>
+<div><label>Valor a prestar</label><input required type="number" id="valor"></div>
+<div><label>Interés (%)</label><input type="number" id="interes" value="30"></div>
+<div><label>Plazo (días)</label><input type="number" id="plazo" value="15"></div>
+</div>
+
+<div class="summary">
+<h3>Resumen</h3>
+<div class="row"><span>Valor solicitado</span><strong id="sValor">$0</strong></div>
+<div class="row"><span>Valor del interés</span><strong id="sInteres">$0</strong></div>
+<div class="row"><span>Total a pagar</span><strong id="sTotal">$0</strong></div>
+<div class="row"><span>Plazo</span><strong id="sPlazo">15 días</strong></div>
+</div>
+
+<div class="loader" id="loader">Enviando solicitud...</div>
+<div class="msg" id="msg"></div>
+<br>
+<button type="submit">Enviar Solicitud</button>
+</form>
+</div>
+</div>
+
+<script>
+const scriptURL="https://script.google.com/macros/s/AKfycbz0ithgLG2jt97B4yyZe90UgmDRAt30p95D3iXBcz5XXdI1J_kW-LLt57Pry_XDIVft/exec";
+const f=(n)=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(n||0);
+
+function calc(){
+const valor=+document.getElementById('valor').value||0;
+const interes=+document.getElementById('interes').value||0;
+const plazo=document.getElementById('plazo').value||15;
+const vi=valor*(interes/100);
+const total=valor+vi;
+sValor.textContent=f(valor);
+sInteres.textContent=f(vi);
+sTotal.textContent=f(total);
+sPlazo.textContent=plazo+" días";
+return {valor,interes,vi,total,plazo};
+}
+['valor','interes','plazo'].forEach(i=>document.getElementById(i).addEventListener('input',calc));
+calc();
+
+document.getElementById('form').addEventListener('submit',async(e)=>{
+e.preventDefault();
+msg.textContent='';
+
+const telefono=telefonoEl=document.getElementById('telefono').value.trim();
+const cedula=document.getElementById('cedula').value.trim();
+
+if(!/^\d{7,15}$/.test(telefono)){msg.textContent="Teléfono inválido";return;}
+if(!/^\d{5,20}$/.test(cedula)){msg.textContent="Cédula inválida";return;}
+
+const c=calc();
+loader.style.display='block';
+
+const data={
+nombres:nombres.value,
+apellidos:apellidos.value,
+cedula:cedula,
+telefono:telefono,
+direccion:direccion.value,
+empresa:empresa.value,
+direccionEmpresa:direccionEmpresa.value,
+valor:c.valor,
+interes:c.interes,
+total:c.total,
+plazo:c.plazo,
+fechaRegistro:new Date().toISOString()
+};
+
+try{
+await fetch(scriptURL,{
+method:'POST',
+mode:'cors',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify(data)
+});
+
+const texto=`SOLICITUD DE CRÉDITO
+
+Nombres: ${data.nombres}
+Apellidos: ${data.apellidos}
+Cédula: ${data.cedula}
+Teléfono: ${data.telefono}
+Dirección: ${data.direccion}
+Empresa: ${data.empresa}
+Dirección empresa: ${data.direccionEmpresa}
+
+Valor solicitado: ${f(c.valor)}
+Interés: ${c.interes}%
+Total a pagar: ${f(c.total)}
+Plazo: ${c.plazo} días`;
+
+msg.style.color='green';
+msg.textContent='Solicitud enviada correctamente.';
+
+window.open(`https://wa.me/573241294986?text=${encodeURIComponent(texto)}`,'_blank');
+
+}catch(err){
+msg.style.color='red';
+msg.textContent='Error de conexión. Intente nuevamente.';
+}
+loader.style.display='none';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+Crea una aplicación web profesional llamada "Crédito Prestamista" completamente funcional y lista para producción.
+
+OBJETIVO:
+La aplicación debe permitir que cualquier persona desde cualquier celular, tablet o computador pueda llenar una solicitud de préstamo y que la información quede almacenada automáticamente para que el administrador pueda verla posteriormente.
+
+REQUISITOS GENERALES:
+
+- Diseño moderno y profesional.
+- Optimizado para dispositivos móviles.
+- Responsive Design.
+- Interfaz elegante con colores verde oscuro, azul oscuro y blanco.
+- Todo el contenido en español.
+- Un solo archivo index.html.
+- HTML5, CSS3 y JavaScript puro.
+- Compatible con GitHub Pages.
+- Compatible con Netlify.
+- Debe funcionar desde cualquier dispositivo con acceso a internet.
+
+FORMULARIO:
+
+Campos obligatorios:
+
+- Nombres
+- Apellidos
+- Dirección de residencia
+- Número de cédula
+- Teléfono
+- Empresa donde trabaja
+- Dirección de la empresa
+- Valor a prestar
+- Interés (%)
+- Plazo en días
+
+VALORES PREDETERMINADOS:
+
+- Interés: 30%
+- Plazo: 15 días
+
+FUNCIONALIDADES:
+
+Al ingresar el valor a prestar:
+
+- Calcular automáticamente el valor del interés.
+- Calcular automáticamente el total a pagar.
+- Mostrar los resultados en tiempo real.
+- Formatear todos los valores en pesos colombianos (COP).
+
+RESUMEN EN PANTALLA:
+
+Mostrar:
+
+Valor solicitado
+Valor del interés
+Total a pagar
+Plazo
+
+ALMACENAMIENTO DE DATOS:
+
+IMPORTANTE:
+
+No usar almacenamiento local del navegador.
+
+Cada solicitud debe guardarse automáticamente en Google Sheets mediante Google Apps Script.
+
+Utilizar esta URL de Apps Script:
+
+https://script.google.com/macros/s/AKfycbz0ithgLG2jt97B4yyZe90UgmDRAt30p95D3iXBcz5XXdI1J_kW-LLt57Pry_XDIVft/exec
+
+Enviar mediante fetch() los siguientes campos:
+
+- nombres
+- apellidos
+- cedula
+- telefono
+- direccion
+- empresa
+- direccionEmpresa
+- valor
+- interes
+- total
+- plazo
+- fechaRegistro
+
+La información debe quedar guardada en Google Sheets para poder visualizar todas las solicitudes recibidas desde cualquier dispositivo.
+
+WHATSAPP:
+
+Agregar botón:
+
+"Enviar Solicitud"
+
+Al presionar el botón:
+
+1. Guardar la información en Google Sheets.
+2. Abrir WhatsApp automáticamente.
+3. Enviar un mensaje al número:
+
+3241294986
+
+Formato:
+
+SOLICITUD DE CRÉDITO
+
+Nombres:
+Apellidos:
+Cédula:
+Teléfono:
+Dirección:
+Empresa:
+Dirección empresa:
+
+Valor solicitado:
+Interés:
+Total a pagar:
+Plazo:
+
+VALIDACIONES:
+
+- No permitir campos vacíos.
+- Validar teléfono.
+- Validar cédula.
+- Mostrar mensajes de error amigables.
+
+EXPERIENCIA DE USUARIO:
+
+- Indicador de carga al enviar.
+- Mensaje de éxito cuando la información se guarde.
+- Mensaje de error si falla la conexión.
+- Animaciones suaves.
+
+ENTREGA:
+
+Generar un único archivo index.html completo y funcional.
+
+No mostrar fragmentos de código.
+
+Entregar únicamente el código final listo para copiar, guardar como index.html y publicar en GitHub Pages para que funcione desde cualquier dispositivo conectado a internet.

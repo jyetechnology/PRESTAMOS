@@ -40,10 +40,10 @@ function calcular(){
 
     document.getElementById("valorSolicitado").innerText=formatoCOP.format(valor);
 
-    document.getElementById("valorInteres").innerText=
-        interes>0
-        ? formatoCOP.format(valorInteres)+" ("+interes+"%)"
-        : "$0";
+    document.getElementById("valorInteres").innerHTML =
+    interes > 0
+    ? `${formatoCOP.format(valorInteres)} <br><small>(${interes}%)</small>`
+    : "$0";
 
     document.getElementById("valorTotal").innerText=formatoCOP.format(total);
 

@@ -1,85 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CredyCash JGL Express</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:
+linear-gradient(135deg,#020617,#052e16,#000000);
+min-height:100vh;
+padding:20px;
+color:#fff;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+}
+
+.card{
+background:rgba(15,23,42,.95);
+border:1px solid rgba(34,197,94,.25);
+border-radius:25px;
+padding:30px;
+box-shadow:
+0 0 30px rgba(34,197,94,.15),
+0 0 60px rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+text-align:center;
+margin-bottom:25px;
+}
+
+.logo img{
+width:100%;
+max-width:320px;
+border-radius:20px;
+box-shadow:
+0 0 25px rgba(255,215,0,.25);
+}
+
+h1{
+text-align:center;
+font-size:34px;
+margin-bottom:25px;
+font-weight:700;
+background:
+linear-gradient(90deg,#22c55e,#ffd700,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:600;
+color:#d1d5db;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:6px;
+border-radius:12px;
+border:1px solid rgba(34,197,94,.35);
+background:#0f172a;
+color:white;
+font-size:15px;
+transition:.3s;
+}
+
+input:focus{
+outline:none;
+border-color:#ffd700;
+box-shadow:0 0 15px rgba(255,215,0,.3);
+}
+
+.resumen{
+margin-top:25px;
+padding:20px;
+border-radius:18px;
+background:
+linear-gradient(
+180deg,
+rgba(34,197,94,.08),
+rgba(255,215,0,.08)
+);
+border:1px solid rgba(255,215,0,.25);
+}
+
+.resumen h2{
+color:#ffd700;
+margin-bottom:12px;
+}
+
+.resumen p{
+margin-bottom:10px;
+}
+
+.total{
+font-size:30px;
+font-weight:700;
+color:#22c55e;
+}
+
+button{
+width:100%;
+padding:16px;
+margin-top:25px;
+border:none;
+border-radius:14px;
+background:
+linear-gradient(
+90deg,
+#16a34a,
+#22c55e
+);
+color:white;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 0 20px rgba(34,197,94,.4);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="logo">
+<img src="logo" alt="logo">
+</div>
+
+<h1>CREDYCASH JGL EXPRESS</h1>
+
+<label>Nombres</label>
+<input type="text" id="nombres">
+
+<label>Apellidos</label>
+<input type="text" id="apellidos">
+
+<label>Dirección donde vive</label>
+<input type="text" id="direccion">
+
+<label>Número de cédula</label>
+<input type="text" id="cedula">
+
+<label>Teléfono</label>
+<input type="text" id="telefono">
+
+<label>Empresa donde trabaja</label>
+<input type="text" id="empresa">
+
+<label>Dirección de la empresa</label>
+<input type="text" id="direccionEmpresa">
+
+<label>Valor a prestar</label>
+<input type="number" id="valor" oninput="calcular()">
+
+<label>Interés (%)</label>
+<input type="number" id="interes" value="30" oninput="calcular()">
+
+<label>Plazo (días)</label>
+<input type="number" id="plazo" value="15" oninput="calcular()">
+
+<div class="resumen">
+
+<h2>Resumen del Crédito</h2>
+
+<p>
+Valor solicitado:
+<strong id="valorSolicitado">$0</strong>
+</p>
+
+<p>
+Porcentaje de interés:
+<strong id="porcentajeInteres">0%</strong>
+</p>
+
+<p>
+Valor del interés:
+<strong id="valorInteres">$0</strong>
+</p>
+
+<p class="total">
+Total a pagar:
+<span id="valorTotal">$0</span>
+</p>
+
+<p>
+Plazo:
+<strong id="plazoTexto">15 días</strong>
+</p>
+
+</div>
+
+<button onclick="enviarWhatsApp()">
+ENVIAR SOLICITUD
+</button>
+
+</div>
+
+</div>
+
 <script>
 
-const formatoCOP = new Intl.NumberFormat('es-CO',{
-    style:'currency',
-    currency:'COP',
-    maximumFractionDigits:0
-});
-
-function seleccionarPlan(){
-
-    const plan=document.getElementById("planCredito").value;
-
-    if(plan===""){
-        document.getElementById("plazo").value="";
-        document.getElementById("interes").value="";
-        calcular();
-        return;
-    }
-
-    const datos=plan.split("|");
-
-    document.getElementById("plazo").value=datos[0];
-    document.getElementById("interes").value=datos[1];
-
-    calcular();
-
+const formatoCOP = new Intl.NumberFormat(
+'es-CO',
+{
+style:'currency',
+currency:'COP',
+maximumFractionDigits:0
 }
+);
 
 function calcular(){
 
-    const valor=parseFloat(document.getElementById("valor").value)||0;
+const valor =
+parseFloat(
+document.getElementById('valor').value
+) || 0;
 
-    const interes=parseFloat(document.getElementById("interes").value)||0;
+const interes =
+parseFloat(
+document.getElementById('interes').value
+) || 0;
 
-    const plazo=parseInt(document.getElementById("plazo").value)||0;
+const plazo =
+parseInt(
+document.getElementById('plazo').value
+) || 0;
 
-    const valorInteres=valor*interes/100;
+const valorInteres =
+valor * interes / 100;
 
-    const total=valor+valorInteres;
+const total =
+valor + valorInteres;
 
-    document.getElementById("valorSolicitado").innerText=formatoCOP.format(valor);
+document.getElementById(
+'valorSolicitado'
+).innerText =
+formatoCOP.format(valor);
 
-    document.getElementById("valorInteres").innerHTML =
-    interes > 0
-    ? `${formatoCOP.format(valorInteres)} <br><small>(${interes}%)</small>`
-    : "$0";
+document.getElementById(
+'valorInteres'
+).innerText =
+formatoCOP.format(valorInteres);
 
-    document.getElementById("valorTotal").innerText=formatoCOP.format(total);
+document.getElementById(
+'valorTotal'
+).innerText =
+formatoCOP.format(total);
 
-    document.getElementById("plazoTexto").innerText=
-        plazo>0
-        ? plazo+" días"
-        : "-";
+document.getElementById(
+'plazoTexto'
+).innerText =
+plazo + ' días';
 
 }
 
 function enviarWhatsApp(){
 
-    const nombres=document.getElementById('nombres').value.trim();
-    const apellidos=document.getElementById('apellidos').value.trim();
-    const direccion=document.getElementById('direccion').value.trim();
-    const cedula=document.getElementById('cedula').value.trim();
-    const telefono=document.getElementById('telefono').value.trim();
-    const empresa=document.getElementById('empresa').value.trim();
-    const direccionEmpresa=document.getElementById('direccionEmpresa').value.trim();
+const nombres =
+document.getElementById('nombres').value.trim();
 
-    const valor=parseFloat(document.getElementById('valor').value)||0;
-    const interes=parseFloat(document.getElementById('interes').value)||0;
-    const plazo=parseInt(document.getElementById('plazo').value)||0;
+const apellidos =
+document.getElementById('apellidos').value.trim();
 
-    if(!nombres || !apellidos || !cedula || !telefono || !valor || !plazo){
+const direccion =
+document.getElementById('direccion').value.trim();
 
-        alert("Complete todos los campos y seleccione un plan.");
+const cedula =
+document.getElementById('cedula').value.trim();
 
-        return;
+const telefono =
+document.getElementById('telefono').value.trim();
 
-    }
+const empresa =
+document.getElementById('empresa').value.trim();
 
-    const valorInteres=valor*interes/100;
-    const total=valor+valorInteres;
+const direccionEmpresa =
+document.getElementById('direccionEmpresa').value.trim();
 
-    const mensaje=`SOLICITUD DE CRÉDITO
+const valor =
+parseFloat(
+document.getElementById('valor').value
+) || 0;
+
+const interes =
+parseFloat(
+document.getElementById('interes').value
+) || 0;
+
+const plazo =
+parseInt(
+document.getElementById('plazo').value
+) || 0;
+
+if(
+!nombres ||
+!apellidos ||
+!cedula ||
+!telefono ||
+!valor
+){
+alert(
+'Complete todos los campos obligatorios'
+);
+return;
+}
+
+const valorInteres =
+valor * interes / 100;
+
+const total =
+valor + valorInteres;
+
+const mensaje = `SOLICITUD DE CRÉDITO
 
 Nombres: ${nombres}
 Apellidos: ${apellidos}
@@ -96,32 +356,36 @@ Valor Interés: ${formatoCOP.format(valorInteres)}
 Total a Pagar: ${formatoCOP.format(total)}
 Plazo: ${plazo} días`;
 
-    fetch(
-    "https://script.google.com/macros/s/AKfycbz0ithgLG2jt97B4yyZe90UgmDRAt30p95D3iXBcz5XXdI1J_kW-LLt57Pry_XDIVft/exec",
-    {
-        method:"POST",
-        body:JSON.stringify({
-            nombres,
-            apellidos,
-            cedula,
-            telefono,
-            direccion,
-            empresa,
-            direccionEmpresa,
-            valor,
-            interes,
-            total,
-            plazo
-        })
-    });
+fetch(
+"https://script.google.com/macros/s/AKfycbz0ithgLG2jt97B4yyZe90UgmDRAt30p95D3iXBcz5XXdI1J_kW-LLt57Pry_XDIVft/exec",
+{
+method:"POST",
+body:JSON.stringify({
+nombres,
+apellidos,
+cedula,
+telefono,
+direccion,
+empresa,
+direccionEmpresa,
+valor,
+interes,
+total,
+plazo
+})
+}
+);
 
-    window.open(
-        `https://wa.me/573241294986?text=${encodeURIComponent(mensaje)}`,
-        "_blank"
-    );
+window.open(
+`https://wa.me/573241294986?text=${encodeURIComponent(mensaje)}`,
+"_blank"
+);
 
 }
 
-seleccionarPlan();
+calcular();
 
 </script>
+
+</body>
+</html>

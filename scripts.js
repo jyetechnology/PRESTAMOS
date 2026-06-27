@@ -267,3 +267,27 @@ function obtenerDatos(){
     };
 
 }
+function seleccionarPlan(){
+
+    const plan = document.getElementById("planCredito").value;
+
+    if(plan===""){
+
+        document.getElementById("plazo").value="";
+        document.getElementById("interes").value="";
+
+        calcularCredito();
+
+        return;
+
+    }
+
+    const datos = plan.split("|");
+
+    document.getElementById("plazo").value = datos[0];
+
+    document.getElementById("interes").value = datos[1];
+
+    calcularCredito();
+
+}

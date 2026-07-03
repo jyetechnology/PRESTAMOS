@@ -44,8 +44,8 @@ body{
 }
 
 .logo img{
-    width:180px;
-    max-width:90%;
+    width:100px;
+    max-width:50%;
     height:auto;
     display:block;
     margin:auto;

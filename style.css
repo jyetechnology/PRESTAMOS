@@ -88,6 +88,23 @@ h1{
     color:#fff;
     transition:.25s;
 }
+select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#111827;
+    color:#fff;
+    font-size:15px;
+    transition:.25s;
+    cursor:pointer;
+}
+
+select:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 15px rgba(255,215,0,.25);
+}
 
 .field input:focus,
 .field select:focus,

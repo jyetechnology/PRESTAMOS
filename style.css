@@ -97,6 +97,69 @@ h1{
     box-shadow:0 0 15px rgba(255,215,0,.25);
 }
 
+.planes{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:15px;
+margin-bottom:20px;
+}
+
+.plan-card{
+
+background:#0f172a;
+border:2px solid rgba(34,197,94,.2);
+border-radius:18px;
+padding:18px;
+cursor:pointer;
+text-align:center;
+transition:.3s;
+
+}
+
+.plan-card:hover{
+
+transform:translateY(-5px);
+border-color:#22c55e;
+
+}
+
+.plan-card.activo{
+
+background:linear-gradient(180deg,#16a34a,#22c55e);
+border-color:#ffd700;
+box-shadow:0 0 20px rgba(255,215,0,.35);
+
+}
+
+.plan-card h3{
+
+margin-bottom:12px;
+
+}
+
+.dias{
+
+font-size:26px;
+font-weight:700;
+margin-bottom:10px;
+
+}
+
+.porcentaje{
+
+font-size:34px;
+font-weight:bold;
+color:#ffd700;
+
+}
+
+.plan-card.activo .porcentaje{
+
+color:white;
+
+}
+
 .resumen{
     margin-top:28px;
     border-radius:18px;

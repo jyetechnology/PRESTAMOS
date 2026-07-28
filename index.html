@@ -183,23 +183,53 @@ box-shadow:0 0 20px rgba(34,197,94,.4);
 
 <label>Plan de crédito</label>
 
-<select id="planCredito" onchange="seleccionarPlan()">
+<label>Seleccione un plan de crédito</label>
 
-    <option value="">Seleccione un plan</option>
+<div class="planes">
 
-    <option value="15|20">
-        15 días - 20%
-    </option>
+    <div class="plan-card"
+         onclick="seleccionarPlan(15,20,this)">
 
-    <option value="20|25">
-        20 días - 25%
-    </option>
+        <h3>PLAN BÁSICO</h3>
 
-    <option value="30|30">
-        30 días - 30%
-    </option>
+        <div class="dias">15 DÍAS</div>
 
-</select>
+        <div class="porcentaje">20%</div>
+
+        <small>Pago rápido</small>
+
+    </div>
+
+    <div class="plan-card"
+         onclick="seleccionarPlan(20,25,this)">
+
+        <h3>PLAN PLUS</h3>
+
+        <div class="dias">20 DÍAS</div>
+
+        <div class="porcentaje">25%</div>
+
+        <small>Mayor plazo</small>
+
+    </div>
+
+    <div class="plan-card"
+         onclick="seleccionarPlan(30,30,this)">
+
+        <h3>PLAN PREMIUM</h3>
+
+        <div class="dias">30 DÍAS</div>
+
+        <div class="porcentaje">30%</div>
+
+        <small>Más flexibilidad</small>
+
+    </div>
+
+</div>
+
+<input type="hidden" id="plazo">
+<input type="hidden" id="interes">
 
 <input type="hidden" id="plazo">
 <input type="hidden" id="interes">

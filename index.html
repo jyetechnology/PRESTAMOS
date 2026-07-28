@@ -231,9 +231,6 @@ box-shadow:0 0 20px rgba(34,197,94,.4);
 <input type="hidden" id="plazo">
 <input type="hidden" id="interes">
 
-<input type="hidden" id="plazo">
-<input type="hidden" id="interes">
-
 <div class="resumen">
 
 <h2>Resumen del Crédito</h2>
@@ -445,6 +442,15 @@ function seleccionarPlan() {
 }
 
 
+window.onload = function(){
+
+    seleccionarPlan(
+        15,
+        20,
+        document.querySelector(".plan-card")
+    );
+
+}
 </script>
 
 </body>

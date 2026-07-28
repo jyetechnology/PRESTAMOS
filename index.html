@@ -395,6 +395,26 @@ window.open(
 
 }
 
+function seleccionarPlan(){
+
+    const plan = document.getElementById("planCredito").value;
+
+    if(plan === ""){
+        document.getElementById("plazo").value = "";
+        document.getElementById("interes").value = "";
+        calcular();
+        return;
+    }
+
+    const datos = plan.split("|");
+
+    document.getElementById("plazo").value = datos[0];
+    document.getElementById("interes").value = datos[1];
+
+    calcular();
+
+}
+
 calcular();
 
 </script>

@@ -42,30 +42,23 @@ backdrop-filter:blur(10px);
 }
 
 .logo{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 25px;
+text-align:center;
+margin-bottom:25px;
 }
 
 .logo img{
-    width:100px;  
-    max-width:170px;
-    height:10;
-    display:block;
-    object-fit:contain;
-
-    border-radius:12px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
-
-    padding:8px;
+width:100%;
+max-width:320px;
+border-radius:20px;
+box-shadow:
+0 0 25px rgba(255,215,0,.25);
+}
 
 h1{
 text-align:center;
 font-size:34px;
 margin-bottom:25px;
-font-weight:350;
+font-weight:700;
 background:
 linear-gradient(90deg,#22c55e,#ffd700,#ffffff);
 -webkit-background-clip:text;
@@ -158,8 +151,8 @@ box-shadow:0 0 20px rgba(34,197,94,.4);
 
 <div class="card">
 
-<div class="logo.png.png">
-<img src="logo.png.png" alt="CredyCash JGL Express">
+<div class="logo">
+<img src="logo" alt="logo">
 </div>
 
 <h1>CREDYCASH JGL EXPRESS</h1>
@@ -188,11 +181,28 @@ box-shadow:0 0 20px rgba(34,197,94,.4);
 <label>Valor a prestar</label>
 <input type="number" id="valor" oninput="calcular()">
 
-<label>Interés (%)</label>
-<input type="number" id="interes" value="30" oninput="calcular()">
+<label>Plan de crédito</label>
 
-<label>Plazo (días)</label>
-<input type="number" id="plazo" value="15" oninput="calcular()">
+<select id="planCredito" onchange="seleccionarPlan()">
+
+    <option value="">Seleccione un plan</option>
+
+    <option value="15|20">
+        15 días - 20%
+    </option>
+
+    <option value="20|25">
+        20 días - 25%
+    </option>
+
+    <option value="30|30">
+        30 días - 30%
+    </option>
+
+</select>
+
+<input type="hidden" id="plazo">
+<input type="hidden" id="interes">
 
 <div class="resumen">
 
@@ -204,12 +214,7 @@ Valor solicitado:
 </p>
 
 <p>
-Porcentaje de interés:
-<strong id="porcentajeInteres">0%</strong>
-</p>
-
-<p>
-Valor del interés:
+Interés:
 <strong id="valorInteres">$0</strong>
 </p>
 

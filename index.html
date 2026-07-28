@@ -187,19 +187,6 @@ box-shadow:0 0 20px rgba(34,197,94,.4);
 
 function seleccionarPlazo(){
 
-    const plan = document.getElementById("planCredito").value;
-
-    if(plan==""){
-        document.getElementById("plazo").value="";
-        document.getElementById("interes").value="";
-        calcular();
-        return;
-    }
-
-    const datos = plan.split("|");
-
-    document.getElementById("plazo").value = datos[0];
-    document.getElementById("interes").value = datos[1];
 
     calcular();
 }

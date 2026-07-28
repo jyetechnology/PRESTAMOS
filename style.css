@@ -371,3 +371,48 @@ font-size:22px;
 color:gold;
 
 }
+
+/* ===== Estilo del selector de plazo ===== */
+
+#planCredito{
+    width:100%;
+    padding:14px 18px;
+    margin-top:6px;
+    border:1px solid rgba(34,197,94,.25);
+    border-radius:12px;
+    background:#111827;
+    color:#fff;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    /* Flecha personalizada */
+    background-image:
+        linear-gradient(45deg, transparent 50%, #ffd700 50%),
+        linear-gradient(135deg, #ffd700 50%, transparent 50%);
+    background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 16px) calc(50% - 3px);
+    background-size:6px 6px;
+    background-repeat:no-repeat;
+
+    transition:.3s;
+}
+
+#planCredito:hover{
+    border-color:#22c55e;
+}
+
+#planCredito:focus{
+    outline:none;
+    border-color:#ffd700;
+    box-shadow:0 0 15px rgba(255,215,0,.30);
+}
+
+#planCredito option{
+    background:#0f172a;
+    color:#fff;
+}

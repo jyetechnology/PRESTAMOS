@@ -457,32 +457,23 @@ function seleccionarPlan() {
 }
 
 
-window.onload = function(){
 
-    seleccionarPlan(
-        15,
-        20,
-        document.querySelector(".plan-card")
-    );
-
-}
 <label>Plazo del crédito</label>
 
 <select id="planCredito" onchange="seleccionarPlazo()">
 
     <option value="">Seleccione un plazo</option>
 
-    <option value="15|20">
-        15 días (20%)
-    </option>
+    <option value="15|20">15 días</option>
 
-    <option value="20|25">
-        20 días (25%)
-    </option>
+    <option value="20|25">20 días</option>
 
-    <option value="30|30">
-        30 días (30%)
-    </option>
+    <option value="30|30">30 días</option>
+
+</select>
+
+<input type="hidden" id="plazo">
+<input type="hidden" id="interes">
 
 </select>
 
